@@ -1,4 +1,5 @@
 import EnterBox from "@/components/login/EnterBox";
+import Link from "next/link";
 import React from "react";
 
 const Login = () => {
@@ -13,9 +14,9 @@ const Login = () => {
           <button type="button" className="text-[14px] text-gray-600">
             비밀번호 찾기
           </button>
-          <button type="button" className="text-[14px] text-gray-600">
+          <Link href={"/signup"} className="text-[14px] text-gray-600">
             회원가입
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { ILoginForm } from "@/types/sign";
+import { ILoginForm, ISignUpForm } from "@/types/sign";
 import { kickbuckInstance } from "../instance";
 
 export const sign = {
@@ -6,6 +6,15 @@ export const sign = {
     const { data } = await kickbuckInstance.post<string>(
       `/auth/signin`,
       loginForm
+    );
+
+    return data;
+  },
+
+  emailSignUp: async (signUpForm: ISignUpForm) => {
+    const { data } = await kickbuckInstance.post<string>(
+      `/user/signup`,
+      signUpForm
     );
 
     return data;
