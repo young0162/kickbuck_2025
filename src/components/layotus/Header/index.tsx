@@ -11,6 +11,7 @@ const Header = () => {
 
   const onClickLogout = () => {
     localStorage.setItem("user", "false");
+    setLogin("false");
     window.location.reload();
   };
 

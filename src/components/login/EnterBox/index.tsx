@@ -3,7 +3,7 @@
 import { sign } from "@/service/sign";
 import { useLoginStore } from "@/store/header";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 
 const EnterBox = () => {
   const [id, setId] = useState("");
@@ -35,6 +35,10 @@ const EnterBox = () => {
       });
   };
 
+  const activeEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") onClickLogin();
+  };
+
   return (
     <div className="flex flex-col border border-gray-400 p-12 rounded-[8px]">
       <div className="flex flex-col border border-gray-300 rounded-[8px]">
@@ -52,6 +56,7 @@ const EnterBox = () => {
             type="password"
             placeholder="비밀번호"
             onChange={(e) => onChangePw(e.target.value)}
+            onKeyDown={(e) => activeEnter(e)}
           />
         </div>
       </div>
