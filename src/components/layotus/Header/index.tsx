@@ -1,10 +1,13 @@
 "use client";
 
+import { useLoginStore } from "@/store/header";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const Header = () => {
   const [user, setUser] = useState("false");
+
+  const { login, setLogin } = useLoginStore();
 
   const onClickLogout = () => {
     localStorage.setItem("user", "false");
@@ -13,7 +16,12 @@ const Header = () => {
 
   useEffect(() => {
     setUser(localStorage.getItem("user") ?? "");
-  }, []);
+    setLogin(localStorage.getItem("user") ?? "");
+  }, [user]);
+
+  useEffect(() => {
+    setUser(login);
+  }, [login]);
 
   return (
     <div className="flex-col">

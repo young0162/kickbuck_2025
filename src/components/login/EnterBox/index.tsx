@@ -1,5 +1,7 @@
 "use client";
 
+import { sign } from "@/service/sign";
+import { useLoginStore } from "@/store/header";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -7,6 +9,9 @@ const EnterBox = () => {
   const [id, setId] = useState("");
   const [password, setPassWord] = useState("");
   const router = useRouter();
+
+  const { emailLogin } = sign;
+  const { setLogin } = useLoginStore();
 
   const onChangeId = (value: string) => {
     setId(value);
@@ -17,10 +22,17 @@ const EnterBox = () => {
   };
 
   const onClickLogin = () => {
-    if (id === "wkdehdud3" && password === "0162") {
-      localStorage.setItem("user", "true");
-      router.push("/");
-    } else alert("아이디와 비밀번호가 맞지않아요!");
+    emailLogin({ email: id, password: password })
+      .then((res) => {
+        console.log("res", res);
+        setLogin("true");
+        localStorage.setItem("user", "true");
+        router.push("/");
+      })
+      .catch((error) => {
+        console.log("error", error.message);
+        alert("아이디와 비밀번호가 맞지않아요!");
+      });
   };
 
   return (
