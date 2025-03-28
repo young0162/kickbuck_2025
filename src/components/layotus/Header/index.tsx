@@ -32,13 +32,18 @@ const Header = () => {
             로그인
           </Link>
         ) : (
-          <button
-            type="button"
-            className="text-[14px] cursor-pointer"
-            onClick={onClickLogout}
-          >
-            로그아웃
-          </button>
+          <div className="flex gap-3">
+            <Link className="text-[14px] cursor-pointer" href={"/mypage"}>
+              마이페이지
+            </Link>
+            <button
+              type="button"
+              className="text-[14px] cursor-pointer"
+              onClick={onClickLogout}
+            >
+              로그아웃
+            </button>
+          </div>
         )}
       </div>
       <div className="flex justify-between px-8 py-4 border-b border-b-indigo-600">
