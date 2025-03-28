@@ -1,5 +1,6 @@
 "use client";
 
+import PageTitle from "@/components/common/PageTitle";
 import { sign } from "@/service/sign";
 import { useLoginStore } from "@/store/header";
 import { useRouter } from "next/navigation";
@@ -38,7 +39,7 @@ const SignUp = () => {
 
   return (
     <main className="flex flex-col justify-center items-center py-12 my-14">
-      <h1 className="mb-6 text-2xl">회원가입</h1>
+      <PageTitle title="회원가입" />
       <div className="max-w-[450px] w-full">
         <div className="flex flex-col border border-gray-400 p-12 rounded-[8px]">
           <div className="flex flex-col border border-gray-300 rounded-[8px]">
