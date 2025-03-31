@@ -1,5 +1,6 @@
 import Card from "@/components/Card";
 import PageTitle from "@/components/common/PageTitle";
+import Link from "next/link";
 import React from "react";
 
 const Mypage = () => {
@@ -7,9 +8,12 @@ const Mypage = () => {
     <div className="flex flex-col justify-center items-center py-12 my-14 max-w-[1024px] w-full">
       <PageTitle title="마이페이지" />
       <div className="w-full flex justify-end mb-6">
-        <button className="px-2 py-3 bg-indigo-400 text-white rounded-sm text-[14px]">
+        <Link
+          href={"/mypage/add"}
+          className="px-2 py-3 bg-indigo-400 text-white rounded-sm text-[14px]"
+        >
           버킷리스트 +
-        </button>
+        </Link>
       </div>
       <div className="bg-indigo-100 rounded-sm px-8 py-6 w-full">
         <ul className="flex gap-4 p-4 mb-4">
