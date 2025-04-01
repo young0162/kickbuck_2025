@@ -1,9 +1,29 @@
+"use client";
+
 import Card from "@/components/Card";
 import PageTitle from "@/components/common/PageTitle";
+import { bucket } from "@/service/bucket";
+import { IMyBucketForm } from "@/types/bucket";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Mypage = () => {
+  const { bucketMyList } = bucket;
+
+  const [myBuckets, setMyBuckets] = useState<IMyBucketForm[]>([]);
+
+  const getMyBucketList = () => {
+    bucketMyList(4)
+      .then((res) => {
+        setMyBuckets(res);
+      })
+      .catch((error) => {});
+  };
+
+  useEffect(() => {
+    getMyBucketList();
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center py-12 my-14 max-w-[1024px] w-full">
       <PageTitle title="마이페이지" />
@@ -24,6 +44,16 @@ const Mypage = () => {
           <li className="text-[14px]">오프 버킷리스트</li>
           <li className="text-[14px]">공감한 버킷리스트</li>
         </ul>
+        {myBuckets?.map((item) => {
+          return (
+            <div key={item?.id + item?.title}>
+              {item?.title}
+              {item?.description}
+              {item?.dday}
+              {item?.rock}
+            </div>
+          );
+        })}
         <Card />
       </div>
     </div>
