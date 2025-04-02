@@ -18,4 +18,10 @@ export const bucket = {
 
     return data;
   },
+
+  bucketAllList: async () => {
+    const { data } = await kickbuckInstance.get<IMyBucketForm[]>(`/bucket`);
+
+    return data;
+  },
 };

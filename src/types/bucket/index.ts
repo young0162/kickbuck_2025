@@ -24,4 +24,5 @@ export interface IMyBucketForm {
   title: string;
   together: number;
   together_ids: string;
+  category: number;
 }
