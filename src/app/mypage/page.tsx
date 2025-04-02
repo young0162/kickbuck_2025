@@ -2,6 +2,8 @@
 
 import Card from "@/components/Card";
 import PageTitle from "@/components/common/PageTitle";
+import Tabs from "@/components/common/Tabs";
+import { BUCKET_TYPES } from "@/constraint/bucketTypes";
 import { bucket } from "@/service/bucket";
 import { IMyBucketForm } from "@/types/bucket";
 import Link from "next/link";
@@ -12,10 +14,14 @@ const Mypage = () => {
 
   const [myBuckets, setMyBuckets] = useState<IMyBucketForm[]>([]);
 
-  const getMyBucketList = () => {
+  const getMyBucketList = (categoryNumber?: number) => {
     bucketMyList(4)
       .then((res) => {
-        setMyBuckets(res);
+        setMyBuckets(
+          categoryNumber
+            ? res?.filter((item) => item?.category === categoryNumber)
+            : res
+        );
       })
       .catch((error) => {});
   };
@@ -35,26 +41,13 @@ const Mypage = () => {
           버킷리스트 +
         </Link>
       </div>
-      <div className="bg-indigo-100 rounded-sm px-8 py-6 w-full">
-        <ul className="flex gap-4 p-4 mb-4">
-          <li className="text-[14px]">나의 버킷리스트</li>
-          <li className="text-[14px]">함께하는 버킷리스트</li>
-          <li className="text-[14px]">대기중인 버킷리스트</li>
-          <li className="text-[14px]">성공한 버킷리스트</li>
-          <li className="text-[14px]">오프 버킷리스트</li>
-          <li className="text-[14px]">공감한 버킷리스트</li>
-        </ul>
-        {myBuckets?.map((item) => {
-          return (
-            <div key={item?.id + item?.title}>
-              {item?.title}
-              {item?.description}
-              {item?.dday}
-              {item?.rock}
-            </div>
-          );
-        })}
-        <Card />
+      <div className="rounded-sm px-8 py-6 w-full">
+        <Tabs items={BUCKET_TYPES} onClick={getMyBucketList} />
+        <div className="flex gap-4">
+          {myBuckets?.map((item) => {
+            return <Card key={item?.id + item.title} cardData={item} />;
+          })}
+        </div>
       </div>
     </div>
   );
